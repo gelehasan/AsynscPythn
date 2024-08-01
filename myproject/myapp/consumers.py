@@ -47,10 +47,18 @@ class ChatConsumer(AsyncWebsocketConsumer):
         }))
 
 
- async def user_join(self, event):
+    async def user_join(self, event):
+            username = event['username']
+
+            await self.send(text_data=json.dumps({
+                'message': f'{username} has joined the chat',
+                'username': 'system'
+            }))
+
+    async def user_leave(self, event):
         username = event['username']
 
         await self.send(text_data=json.dumps({
-            'message': f'{username} has joined the chat',
+            'message': f'{username} has left the chat',
             'username': 'system'
         }))
