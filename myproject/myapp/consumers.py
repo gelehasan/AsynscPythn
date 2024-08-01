@@ -46,3 +46,11 @@ class ChatConsumer(AsyncWebsocketConsumer):
             'message': message
         }))
 
+
+ async def user_join(self, event):
+        username = event['username']
+
+        await self.send(text_data=json.dumps({
+            'message': f'{username} has joined the chat',
+            'username': 'system'
+        }))
